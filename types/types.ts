@@ -4,3 +4,8 @@ export type Registration = {
     watermeter: number;
     senso_number: number;
 }
+
+export type UserInput = {
+    email: string;
+    senso_number: number;
+}
