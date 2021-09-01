@@ -15,13 +15,13 @@ type FormValues = {
 const Login: NextPage = () => {
     const { register, handleSubmit } = useForm<FormValues>();
     const { login, error } = useContext(AuthContext)
+
     const onSubmit: SubmitHandler<FormValues> = (data) => {
         login({ email: data.email, senso_number: Number(data.senso_number) });
     }
 
     useEffect(() => {
         error && toast.error(error)
-
     }, [error])
 
     return (
@@ -56,7 +56,7 @@ const Login: NextPage = () => {
                     <input type="submit" value="Login" className='h-10 w-full my-2  bg-gray-800 text-white active:shadow-md active:bg-gray-400 active:text-black active:scale-25' />
                 </form>
                 <p>
-                    Don't have an account? <Link href='/account/register'>Register</Link>
+                    Dont have an account? <Link href='/account/register'>Register</Link>
                 </p>
             </div>
         </div>
