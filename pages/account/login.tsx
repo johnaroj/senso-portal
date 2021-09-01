@@ -7,9 +7,6 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { useContext, useEffect } from 'react';
 import { AuthContext } from '@/context/AuthContext';
 
-
-
-
 type FormValues = {
     email: string;
     senso_number: number;
