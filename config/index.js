@@ -8,9 +8,9 @@ export const NEXT_MAIL_PORT =
     process.env.MAIL_PORT || 587
 
 export const NEXT_MAIL_USER =
-    process.env.MAIL_USER || "5bb86265acba58"
+    process.env.MAIL_USER || "soaw@ictlabs.cw"
 
 export const NEXT_MAIL_PASS =
-    process.env.MAIL_PASS || "552c72165c0570"
+    process.env.MAIL_PASS || "$0aw2021!"
 
 export const NEXT_CENSUS_URL = process.env.CENSUS_URL || 'https://www.dooblocawi.com/client/Survey.aspx?Ticket=NFNI367H&Censusid='

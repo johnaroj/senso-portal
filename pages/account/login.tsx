@@ -45,7 +45,7 @@ const Login: NextPage = () => {
                         <div className="mb-4">
                             <label className="mb-2" htmlFor="email">E-mail Address</label>
                             <input
-                                className="w-full h-10 p-1 mt-2 bg-gray-100 focus:border-blue-100 focus:opacity-50"
+                                className="w-full h-10 p-1 mt-2 bg-gray-100 focus:border-blue-100"
                                 type="email"
                                 {...register("email", { required: true })}
                                 required
@@ -54,7 +54,7 @@ const Login: NextPage = () => {
                         <div className="mb-4">
                             <label className="mb-2" htmlFor="email">Senso Number</label>
                             <input
-                                className="w-full h-10 p-1 mt-2 bg-gray-100 focus:border-blue-100 focus:opacity-50"
+                                className="w-full h-10 p-1 mt-2 bg-gray-100 focus:border-blue-100"
                                 type="number"
                                 {...register("senso_number", { required: true })}
                                 required

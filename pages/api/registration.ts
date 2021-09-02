@@ -10,6 +10,9 @@ const transporter = nodemailer.createTransport({
     auth: {
         user: NEXT_MAIL_USER,
         pass: NEXT_MAIL_PASS
+    },
+    tls: {
+        rejectUnauthorized: false
     }
 });
 
@@ -30,7 +33,7 @@ export default async (req: NextApiRequest,
         })
 
         await transporter.sendMail({
-            from: 'test@example.com',
+            from: NEXT_MAIL_HOST,
             to: registration.email,
             subject: 'Registration cbs successfull',
             html: `<p>your new senso number is ${savedRegistration.senso_number}`
