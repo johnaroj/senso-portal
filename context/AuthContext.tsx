@@ -21,7 +21,6 @@ export const AuthProvider: FC = ({ children }) => {
   const router = useRouter()
   // Register user
   const register = async (registration: Registration) => {
-    console.log('authContext', registration)
     const res = await fetch(`${NEXT_URL}/api/registration`, {
       method: 'POST',
       headers: {
@@ -33,7 +32,7 @@ export const AuthProvider: FC = ({ children }) => {
     const data = await res.json()
     if (res.ok) {
       setUser(data)
-      router.push('/account/dashboard')
+      router.push('/')
     } else {
       setError(data.message)
       setError(null)
@@ -54,7 +53,7 @@ export const AuthProvider: FC = ({ children }) => {
 
     if (res.ok) {
       setUser(data)
-      router.push('/account/dashboard')
+      router.push('/success')
     } else {
       setError(data.message)
       setError(null)

@@ -28,7 +28,7 @@ export default async (req: NextApiRequest,
         const savedRegistration = await prisma.registration.create({
             data: registration
         })
-        //console.log('registratoion', registration)
+
         await transporter.sendMail({
             from: 'test@example.com',
             to: registration.email,

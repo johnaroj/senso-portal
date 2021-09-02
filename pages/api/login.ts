@@ -5,7 +5,6 @@ const prisma = new PrismaClient();
 
 export default async (req: NextApiRequest,
     res: NextApiResponse) => {
-    console.log(req)
     if (req.method === 'POST') {
         const { email, senso_number } = req.body;
         const savedRegistration = await prisma.registration.findFirst({
