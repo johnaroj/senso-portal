@@ -11,9 +11,9 @@ const SuccessPage: NextPage = () => {
     const { user } = useContext(AuthContext)
     const router = useRouter();
 
-    // useEffect(() => {
-    //     !user && router.push('/')
-    // }, [])
+    useEffect(() => {
+        !user && router.push('/')
+    }, [])
 
     const handleSubmit = (e: SyntheticEvent) => {
         document.location.href = NEXT_CENSUS_URL + user?.senso_number;
