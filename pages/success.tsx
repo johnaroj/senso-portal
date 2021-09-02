@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { AuthContext } from '@/context/AuthContext';
 import { SyntheticEvent, useContext, useEffect } from "react";
 import { useRouter } from "next/router";
+import { NEXT_CENSUS_URL } from '@/config/index'
 
 const SuccessPage: NextPage = () => {
     const { user } = useContext(AuthContext)
@@ -15,7 +16,7 @@ const SuccessPage: NextPage = () => {
     }, [])
 
     const handleSubmit = (e: SyntheticEvent) => {
-        document.location.href = 'https://www.dooblocawi.com/client/Survey.aspx?Ticket=' + user?.senso_number;
+        document.location.href = NEXT_CENSUS_URL + user?.senso_number;
     }
     return (
         <div>
@@ -30,7 +31,7 @@ const SuccessPage: NextPage = () => {
                     />
 
                 </div>
-                <div className="flex justify-center">
+                <div className="flex justify-center h-screen">
                     <div className="text-center">
                         <h1 className="text-2xl">Danki pa partisipa na Senso 22</h1>
                         <h1 className="text-2xl">Porfabor klik e boton pa yena e enkuesta</h1>
