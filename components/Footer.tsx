@@ -1,6 +1,6 @@
 export const Footer = () => {
     return (
-        <footer className="bg-jelly-bean-500 bottom-0">
+        <footer className="bg-jelly-bean-500 mt-auto">
             <div className="container mt-4 mx-auto text-white">
                 <div className="p-4">
                     <h1 className="text-3xl">Ofisina Sentral di Statistik Kòrsou</h1>

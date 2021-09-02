@@ -11,17 +11,17 @@ const SuccessPage: NextPage = () => {
     const { user } = useContext(AuthContext)
     const router = useRouter();
 
-    useEffect(() => {
-        !user && router.push('/')
-    }, [])
+    // useEffect(() => {
+    //     !user && router.push('/')
+    // }, [])
 
     const handleSubmit = (e: SyntheticEvent) => {
         document.location.href = NEXT_CENSUS_URL + user?.senso_number;
     }
     return (
-        <div>
+        <div className="flex flex-col min-h-screen">
             <Header />
-            <main className="container mx-auto h-screen">
+            <main className="container mx-auto">
                 <div className="py-4">
                     <Image
                         src='/images/proefcensus-logo-final.jpeg'
