@@ -21,7 +21,7 @@ const SuccessPage: NextPage = () => {
     return (
         <div>
             <Header />
-            <div className="container mx-auto">
+            <main className="container mx-auto h-screen">
                 <div className="py-4">
                     <Image
                         src='/images/proefcensus-logo-final.jpeg'
@@ -47,7 +47,7 @@ const SuccessPage: NextPage = () => {
                     </div>
 
                 </div>
-            </div>
+            </main>
             <Footer />
         </div>
     )

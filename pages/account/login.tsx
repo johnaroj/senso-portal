@@ -45,7 +45,7 @@ const Login: NextPage = () => {
                         <div className="mb-4">
                             <label className="mb-2" htmlFor="email">E-mail Address</label>
                             <input
-                                className="w-full h-10 p-1 mt-2 bg-gray-100 focus:border-blue-100"
+                                className="w-full h-10 p-1 mt-2 bg-gray-100 focus:outline-none focus:ring focus:border-jelly-bean-500"
                                 type="email"
                                 {...register("email", { required: true })}
                                 required
@@ -54,13 +54,13 @@ const Login: NextPage = () => {
                         <div className="mb-4">
                             <label className="mb-2" htmlFor="email">Senso Number</label>
                             <input
-                                className="w-full h-10 p-1 mt-2 bg-gray-100 focus:border-blue-100"
+                                className="w-full h-10 p-1 mt-2 bg-gray-100 focus:outline-none focus:ring focus:border-jelly-bean-500"
                                 type="number"
                                 {...register("senso_number", { required: true })}
                                 required
                             />
                         </div>
-                        <input type="submit" value="Login" className='h-10 w-full my-2  bg-blue-500 text-white active:shadow-md active:bg-gray-800 active:text-black active:scale-25' />
+                        <input type="submit" value="Login" className='h-10 w-full my-2 bg-jelly-bean-500 hover:bg-jelly-bean-400 text-white active:shadow-md active:scale-110 active:text-gray-100' />
                     </form>
                     <p>
                         Dont have an account? <Link href='/account/register'>Register</Link>

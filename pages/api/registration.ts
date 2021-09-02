@@ -33,7 +33,7 @@ export default async (req: NextApiRequest,
         })
 
         await transporter.sendMail({
-            from: NEXT_MAIL_HOST,
+            from: NEXT_MAIL_USER,
             to: registration.email,
             subject: 'Registration cbs successfull',
             html: `<p>your new senso number is ${savedRegistration.senso_number}`
