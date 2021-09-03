@@ -33,7 +33,7 @@ const SuccessPage: NextPage = () => {
                 </div>
                 <div className="flex justify-center">
                     <div className="text-center">
-                        <h1 className="text-2xl">
+                        {/* <h1 className="text-2xl">
                             Danki pa partisipa na nos Senso di Prueba. Thank you for participating in the Pilot Census.
                             <br />
                             Bo number di Senso ta/ your census number is: {user?.senso_number}
@@ -42,7 +42,7 @@ const SuccessPage: NextPage = () => {
                             <br />
 
                             Danki di parti di Ofisina Sentral Di Estadistika (CBS). Thank you in advance from the Central Bureau of Statistics (CBS).
-                        </h1>
+                        </h1> */}
                         <button className="bg-orange-500 w-64 h-16 my-10 text-white text-2xl shadow-sm hover:shadow-xl hover:bg-orange-700 hover:text-gray-200 active:scale-90" onClick={handleSubmit}>Klik pa yena</button>
                     </div>
 
