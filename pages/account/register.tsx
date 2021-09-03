@@ -15,7 +15,7 @@ type FormValues = {
   senso_number: number;
 };
 const Register: NextPage = () => {
-  const { loading, checkRegistration, register: registerForm, error } = useContext(AuthContext)
+  const { loading, checkWatermeter, register: registerForm, error, checkRegistration } = useContext(AuthContext)
   const { register, handleSubmit } = useForm<FormValues>();
   //const [openModal, setOpenModal] = useState(false);
   // const [confirm, setConfirm] = useState(false);
@@ -27,9 +27,15 @@ const Register: NextPage = () => {
   //useEffect(() => { console.log(openModal) }, [openModal])
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
-    const existing = await checkRegistration(data.watermeter)
+    const existingRegistration = await checkRegistration(data.watermeter, data.email);
+    if (existingRegistration.exists) {
+      toast.error(existingRegistration.message)
+      return;
+    }
 
-    if (existing) {
+    const existing = await checkWatermeter(data.watermeter)
+
+    if (existing.exists) {
       if (confirm('This Watermeter number already exists.\n Do you share this watermeter number? ')) {
         registerForm({ email: data.email, watermeter: data.watermeter, senso_number: 100000 + Math.floor(Math.random() * 900000) });
       }

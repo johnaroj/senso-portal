@@ -3,6 +3,11 @@ import { useRouter } from 'next/router'
 import { Registration, UserInput } from '../types/types'
 import { NEXT_URL } from '@/config/index'
 
+interface CheckIfExistsResponse {
+  exists: boolean;
+  message: string;
+}
+
 interface AuthContextState {
   loading: boolean
   user: Registration | null;
@@ -10,7 +15,9 @@ interface AuthContextState {
   register: (registration: Registration) => void;
   login: (userInput: UserInput) => void;
   logout: () => void;
-  checkRegistration: (watermeter: string) => Promise<boolean>;
+  forgot: (email: string, watermeter: string) => void;
+  checkWatermeter: (watermeter: string) => Promise<CheckIfExistsResponse>;
+  checkRegistration: (watermeter: string, email: string) => Promise<CheckIfExistsResponse>;
 }
 
 export const AuthContext = createContext({} as AuthContextState)
@@ -68,6 +75,23 @@ export const AuthProvider: FC = ({ children }) => {
     }
   }
 
+
+  const forgot = async (email: string, watermeter: string) => {
+    setLoading(true);
+    const res = await fetch(`${NEXT_URL}/api/recover?email=${email}&watermeter=${watermeter}`)
+    const data = await res.json()
+
+    if (res.ok) {
+      setUser(data)
+      setLoading(false);
+      //router.push('/success')
+    } else {
+      setLoading(false);
+      setError(data.message)
+      setError(null)
+    }
+  }
+
   // Logout user
   const logout = async () => {
     const res = await fetch(`${NEXT_URL}/api/logout`, {
@@ -79,17 +103,26 @@ export const AuthProvider: FC = ({ children }) => {
       router.push('/')
     }
   }
-  const checkRegistration = async (watermeter: string) => {
+  const checkWatermeter = async (watermeter: string) => {
     const response = await fetch(`${NEXT_URL}/api/registration?watermeter=${watermeter}`);
     if (!response.ok) {
       throw new Error(response.statusText)
     }
     const exists = await response.json();
-    return !!exists.id;
+    return { exists: !!exists.message, message: exists.message };
+  }
+
+  const checkRegistration = async (watermeter: string, email: string) => {
+    const response = await fetch(`${NEXT_URL}/api/registration?watermeter=${watermeter}&email${email}`);
+    if (!response.ok) {
+      throw new Error(response.statusText)
+    }
+    const exists = await response.json();
+    return { exists: !!exists.message, message: exists.message };
   }
 
   return (
-    <AuthContext.Provider value={{ loading, user, error, register, login, logout, checkRegistration }}>
+    <AuthContext.Provider value={{ loading, user, error, forgot, register, login, logout, checkWatermeter, checkRegistration }}>
       {children}
     </AuthContext.Provider>
   )

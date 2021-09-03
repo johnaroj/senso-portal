@@ -1,31 +1,33 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { PrismaClient } from '@prisma/client'
-import nodemailer from 'nodemailer'
-import { NEXT_MAIL_HOST, NEXT_MAIL_PORT, NEXT_MAIL_USER, NEXT_MAIL_PASS } from '@/config/index'
+import { sendMail } from '@/utils/mail'
 
 const prisma = new PrismaClient();
-const transporter = nodemailer.createTransport({
-    host: NEXT_MAIL_HOST,
-    port: Number(NEXT_MAIL_PORT),
-    auth: {
-        user: NEXT_MAIL_USER,
-        pass: NEXT_MAIL_PASS
-    },
-    tls: {
-        rejectUnauthorized: false
-    }
-});
 
 export default async (req: NextApiRequest,
     res: NextApiResponse) => {
     if (req.method === 'GET') {
-        const watermeter = req.query.watermeter as string;
-        const existing = await prisma.registration.findFirst({
-            where: {
-                watermeter: watermeter
-            },
-        })
-        existing ? res.json(existing) : res.json({})
+        let existing;
+        if (req.query.email) {
+            const watermeter = req.query.watermeter as string;
+            const email = req.query.email as string;
+            existing = await prisma.registration.findFirst({
+                where: {
+                    watermeter: watermeter,
+                    email: email,
+                },
+            })
+            existing ? res.json({ ...existing, message: 'Email and Watermeter already registered' }) : res.json({})
+        } else {
+            const watermeter = req.query.watermeter as string;
+            existing = await prisma.registration.findFirst({
+                where: {
+                    watermeter: watermeter
+                },
+            })
+            existing ? res.json({ ...existing, message: 'Watermeter already registered' }) : res.json({})
+        }
+
     } else if (req.method === 'POST') {
         const registration = req.body;
         const matchedWatermeter = await prisma.watermeter.findFirst({
@@ -39,11 +41,10 @@ export default async (req: NextApiRequest,
                 data: registration
             })
 
-            await transporter.sendMail({
-                from: NEXT_MAIL_USER,
-                to: registration.email,
-                subject: 'Registration cbs successfull',
-                html: `
+            await sendMail(
+                'Registration cbs successfull',
+                registration.email,
+                `
                 <div>
                     <p>
                         Danki pa partisipa na nos Senso di Prueba. Thank you for participating in the Pilot Census.
@@ -59,7 +60,7 @@ export default async (req: NextApiRequest,
                     </p>
                 </div>
             `
-            })
+            )
 
             res.json(savedRegistration);
         } else {

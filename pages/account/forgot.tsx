@@ -9,15 +9,16 @@ import { AuthContext } from '@/context/AuthContext';
 
 type FormValues = {
     email: string;
-    senso_number: number;
+    watermeter: string;
 };
 
-const Login: NextPage = () => {
+const Forgot: NextPage = () => {
     const { register, handleSubmit } = useForm<FormValues>();
-    const { login, error } = useContext(AuthContext)
+    const { forgot, error, loading } = useContext(AuthContext)
 
     const onSubmit: SubmitHandler<FormValues> = (data) => {
-        login({ email: data.email, senso_number: Number(data.senso_number) });
+        forgot(data.email, data.watermeter);
+
     }
 
     useEffect(() => {
@@ -38,7 +39,7 @@ const Login: NextPage = () => {
             <div className="flex items-center">
                 <div className="w-full sm:w-4/5 md:w-3/4 xl:w-2/4 m-auto p-8 rounded-2xl shadow-lg border-t-8 border-blue-100">
                     <h1 className='text-2xl font-bold my-4'>
-                        Login
+                        Recover Senso Number
                     </h1>
                     <ToastContainer />
                     <form onSubmit={handleSubmit(onSubmit)}>
@@ -52,25 +53,19 @@ const Login: NextPage = () => {
                             />
                         </div>
                         <div className="mb-4">
-                            <label className="mb-2" htmlFor="email">Senso Number</label>
+                            <label className="mb-2" htmlFor="watermeter">Watermeter Number</label>
                             <input
                                 className="w-full h-10 p-1 mt-2 bg-gray-100 focus:outline-none focus:ring focus:border-jelly-bean-500"
-                                type="number"
-                                {...register("senso_number", { required: true })}
+                                type="text"
+                                {...register("watermeter", { required: true })}
                                 required
                             />
                         </div>
-                        <input type="submit" value="Login" className='h-10 w-full my-2 bg-jelly-bean-500 hover:bg-jelly-bean-400 text-white active:shadow-md active:scale-110 active:text-gray-100' />
+                        <input type="submit" disabled={loading} value={`${loading ? 'Loading...' : 'Send'}`} className={`h-10 w-full my-2 ${loading ? 'bg-jelly-bean-200' : 'bg-jelly-bean-500'} hover:bg-jelly-bean-400 text-white active:shadow-md active:scale-110 active:text-gray-100`} />
                     </form>
-                    <div className="flex justify-between">
-                        <p>
-                            Dont have an account? <Link href='/account/register'><a className="no-underline hover:underline hover:text-blue-700">Register</a></Link>
-                        </p>
-                        <p>
-                            Forgot Senso Number? <Link href='/account/forgot'><a className="no-underline hover:underline hover:text-blue-700" >Recover</a></Link>
-                        </p>
-                    </div>
-
+                    <p>
+                        Go Back to <Link href='/account/login'><a className="no-underline hover:underline hover:text-blue-700">Login</a></Link>
+                    </p>
                 </div>
             </div>
         </div>
@@ -78,4 +73,4 @@ const Login: NextPage = () => {
     )
 }
 
-export default Login
+export default Forgot
