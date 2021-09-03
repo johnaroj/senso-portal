@@ -38,6 +38,7 @@ export const AuthProvider: FC = ({ children }) => {
       setLoading(false);
       router.push('/')
     } else {
+      setLoading(false);
       setError(data.message)
       setError(null)
     }
@@ -45,6 +46,7 @@ export const AuthProvider: FC = ({ children }) => {
 
   // Login user
   const login = async (user: UserInput) => {
+    setLoading(true);
     const res = await fetch(`${NEXT_URL}/api/login`, {
       method: 'POST',
       headers: {
@@ -57,8 +59,10 @@ export const AuthProvider: FC = ({ children }) => {
 
     if (res.ok) {
       setUser(data)
+      setLoading(false);
       router.push('/success')
     } else {
+      setLoading(false);
       setError(data.message)
       setError(null)
     }
