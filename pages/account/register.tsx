@@ -6,31 +6,42 @@ import 'react-toastify/dist/ReactToastify.css';
 import Image from 'next/image'
 import { AuthContext } from '@/context/AuthContext';
 import Link from 'next/link'
+import Modal from 'components/Modal';
 
 
 type FormValues = {
   email: string;
-  watermeter: number;
+  watermeter: string;
   senso_number: number;
 };
 const Register: NextPage = () => {
-  const { checkRegistration, register: registerForm, error } = useContext(AuthContext)
+  const { loading, checkRegistration, register: registerForm, error } = useContext(AuthContext)
   const { register, handleSubmit } = useForm<FormValues>();
+  //const [openModal, setOpenModal] = useState(false);
+  // const [confirm, setConfirm] = useState(false);
 
   useEffect(() => {
     error && toast.error(error)
   }, [error])
 
+  //useEffect(() => { console.log(openModal) }, [openModal])
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     const existing = await checkRegistration(data.watermeter)
+
     if (existing) {
-      toast.error('already registered')
+      if (confirm('This Watermeter number already exists.\n Do you share this watermeter number? ')) {
+        registerForm({ email: data.email, watermeter: data.watermeter, senso_number: 100000 + Math.floor(Math.random() * 900000) });
+      }
     } else {
-      registerForm({ email: data.email, watermeter: Number(data.watermeter), senso_number: 100000 + Math.floor(Math.random() * 900000) });
+      registerForm({ email: data.email, watermeter: data.watermeter, senso_number: 100000 + Math.floor(Math.random() * 900000) });
     }
   }
 
+  // const onConfirm = (data: boolean) => {
+  //   setConfirm(data)
+  //   setOpenModal(false)
+  // }
 
   return (
     <div className="container mx-auto">
@@ -49,6 +60,7 @@ const Register: NextPage = () => {
             Register Account
           </h1>
           <ToastContainer />
+          {/* <Modal open={openModal} onConfirm={onConfirm} /> */}
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="mb-4">
               <label className="mb-2" htmlFor="email">E-mail Address</label>
@@ -63,12 +75,12 @@ const Register: NextPage = () => {
               <label className="mb-2" htmlFor="watermeter">Watermeter Number</label>
               <input
                 className="w-full h-10 p-1 mt-2 bg-gray-100 focus:outline-none focus:ring focus:border-jelly-bean-500"
-                type="number"
+                type="text"
                 {...register("watermeter", { required: true })}
                 required
               />
             </div>
-            <input type="submit" value="Register" className='h-10 w-full my-2 bg-jelly-bean-500 hover:bg-jelly-bean-400 text-white active:shadow-md active:scale-110 active:text-gray-100' />
+            <input type="submit" disabled={loading} value={`${loading ? 'Loading...' : 'Register'}`} className={`h-10 w-full my-2 ${loading ? 'bg-jelly-bean-200' : 'bg-jelly-bean-500'} hover:bg-jelly-bean-400 text-white active:shadow-md active:scale-110 active:text-gray-100`} />
           </form>
           <p>
             Already have an account? <Link href='/account/login'>Login</Link>

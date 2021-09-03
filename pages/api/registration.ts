@@ -19,27 +19,39 @@ const transporter = nodemailer.createTransport({
 export default async (req: NextApiRequest,
     res: NextApiResponse) => {
     if (req.method === 'GET') {
-        const { watermeter } = req.query;
+        const watermeter = req.query.watermeter as string;
         const existing = await prisma.registration.findFirst({
             where: {
-                watermeter: Number(watermeter)
+                watermeter: watermeter
             },
         })
         existing ? res.json(existing) : res.json({})
     } else if (req.method === 'POST') {
         const registration = req.body;
-        const savedRegistration = await prisma.registration.create({
-            data: registration
+        const matchedWatermeter = await prisma.watermeter.findFirst({
+            where: {
+                watermeter: registration.watermeter
+            }
         })
 
-        await transporter.sendMail({
-            from: NEXT_MAIL_USER,
-            to: registration.email,
-            subject: 'Registration cbs successfull',
-            html: `<p>your new senso number is ${savedRegistration.senso_number}`
-        })
+        if (matchedWatermeter) {
+            const savedRegistration = await prisma.registration.create({
+                data: registration
+            })
 
-        res.json(savedRegistration);
+            await transporter.sendMail({
+                from: NEXT_MAIL_USER,
+                to: registration.email,
+                subject: 'Registration cbs successfull',
+                html: `<p>your new senso number is ${savedRegistration.senso_number}`
+            })
+
+            res.json(savedRegistration);
+        } else {
+            res.status(404).json({ message: 'Watermeter not found' })
+        }
+
+
     }
     else {
         res.status(403).json({ message: 'Method not allowed' });

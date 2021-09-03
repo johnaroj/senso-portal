@@ -4,12 +4,13 @@ import { Registration, UserInput } from '../types/types'
 import { NEXT_URL } from '@/config/index'
 
 interface AuthContextState {
+  loading: boolean
   user: Registration | null;
   error: Error | null;
   register: (registration: Registration) => void;
   login: (userInput: UserInput) => void;
   logout: () => void;
-  checkRegistration: (watermeter: number) => Promise<boolean>;
+  checkRegistration: (watermeter: string) => Promise<boolean>;
 }
 
 export const AuthContext = createContext({} as AuthContextState)
@@ -17,10 +18,12 @@ export const AuthContext = createContext({} as AuthContextState)
 export const AuthProvider: FC = ({ children }) => {
   const [user, setUser] = useState(null)
   const [error, setError] = useState(null)
+  const [loading, setLoading] = useState(false);
 
   const router = useRouter()
   // Register user
   const register = async (registration: Registration) => {
+    setLoading(true);
     const res = await fetch(`${NEXT_URL}/api/registration`, {
       method: 'POST',
       headers: {
@@ -32,6 +35,7 @@ export const AuthProvider: FC = ({ children }) => {
     const data = await res.json()
     if (res.ok) {
       setUser(data)
+      setLoading(false);
       router.push('/')
     } else {
       setError(data.message)
@@ -71,7 +75,7 @@ export const AuthProvider: FC = ({ children }) => {
       router.push('/')
     }
   }
-  const checkRegistration = async (watermeter: number) => {
+  const checkRegistration = async (watermeter: string) => {
     const response = await fetch(`${NEXT_URL}/api/registration?watermeter=${watermeter}`);
     if (!response.ok) {
       throw new Error(response.statusText)
@@ -81,7 +85,7 @@ export const AuthProvider: FC = ({ children }) => {
   }
 
   return (
-    <AuthContext.Provider value={{ user, error, register, login, logout, checkRegistration }}>
+    <AuthContext.Provider value={{ loading, user, error, register, login, logout, checkRegistration }}>
       {children}
     </AuthContext.Provider>
   )

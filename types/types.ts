@@ -1,7 +1,7 @@
 export type Registration = {
     id?: number;
     email: string;
-    watermeter: number;
+    watermeter: string;
     senso_number: number;
 }
 

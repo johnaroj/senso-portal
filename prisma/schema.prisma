@@ -13,6 +13,17 @@ generator client {
 model Registration {
   id           Int    @id @default(autoincrement())
   email        String
-  watermeter   Int
+  watermeter   String
   senso_number Int
+}
+
+model Watermeter {
+  id         Int    @id @default(autoincrement())
+  fixedID    Int
+  watermeter String
+  address    String
+  telephone  String
+  longitude  String
+  latitude   String
+  district   String
 }
