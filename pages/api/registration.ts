@@ -43,7 +43,22 @@ export default async (req: NextApiRequest,
                 from: NEXT_MAIL_USER,
                 to: registration.email,
                 subject: 'Registration cbs successfull',
-                html: `<p>your new senso number is ${savedRegistration.senso_number}`
+                html: `
+                <div>
+                    <p>
+                        Danki pa partisipa na nos Senso di Prueba. Thank you for participating in the Pilot Census.
+                    </p>
+                    <p>
+                        Bo number di Senso ta/ your census number is: ${savedRegistration.senso_number}
+                    </p>
+                    <p>
+                        Pa kuminsa ku bo enkuesta, por fabor primi riba e link aki/ To start your survey, please press this link:
+                    </p>
+                    <p>
+                        Danki di parti di Ofisina Sentral Di Estadistika (CBS). Thank you in advance from the Central Bureau of Statistics (CBS).
+                    </p>
+                </div>
+            `
             })
 
             res.json(savedRegistration);
