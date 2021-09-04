@@ -113,7 +113,7 @@ export const AuthProvider: FC = ({ children }) => {
   }
 
   const checkRegistration = async (watermeter: string, email: string) => {
-    const response = await fetch(`${NEXT_URL}/api/registration?watermeter=${watermeter}&email${email}`);
+    const response = await fetch(`${NEXT_URL}/api/registration?watermeter=${watermeter}&email=${email}`);
     if (!response.ok) {
       throw new Error(response.statusText)
     }

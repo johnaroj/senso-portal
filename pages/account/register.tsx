@@ -8,26 +8,29 @@ import { AuthContext } from '@/context/AuthContext';
 import Link from 'next/link'
 import Modal from 'components/Modal';
 
-
 type FormValues = {
   email: string;
   watermeter: string;
   senso_number: number;
 };
+
 const Register: NextPage = () => {
   const { loading, checkWatermeter, register: registerForm, error, checkRegistration } = useContext(AuthContext)
-  const { register, handleSubmit } = useForm<FormValues>();
-  //const [openModal, setOpenModal] = useState(false);
-  // const [confirm, setConfirm] = useState(false);
+  const { register, getValues, handleSubmit } = useForm<FormValues>();
+  const [showModal, setShowModal] = useState(false);
+  const [confirm, setConfirm] = useState(false);
 
   useEffect(() => {
     error && toast.error(error)
   }, [error])
 
-  //useEffect(() => { console.log(openModal) }, [openModal])
+  useEffect(() => {
+    confirm && registerForm({ email: getValues('email'), watermeter: getValues('watermeter'), senso_number: 100000 + Math.floor(Math.random() * 900000) });
+  }, [showModal, confirm])
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     const existingRegistration = await checkRegistration(data.watermeter, data.email);
+
     if (existingRegistration.exists) {
       toast.error(existingRegistration.message)
       return;
@@ -36,18 +39,17 @@ const Register: NextPage = () => {
     const existing = await checkWatermeter(data.watermeter)
 
     if (existing.exists) {
-      if (confirm('This Watermeter number already exists.\n Do you share this watermeter number? ')) {
-        registerForm({ email: data.email, watermeter: data.watermeter, senso_number: 100000 + Math.floor(Math.random() * 900000) });
-      }
+      setShowModal(true)
+
     } else {
       registerForm({ email: data.email, watermeter: data.watermeter, senso_number: 100000 + Math.floor(Math.random() * 900000) });
     }
   }
 
-  // const onConfirm = (data: boolean) => {
-  //   setConfirm(data)
-  //   setOpenModal(false)
-  // }
+  const onConfirm = (data: boolean) => {
+    setConfirm(data)
+    setShowModal(false)
+  }
 
   return (
     <div className="container mx-auto">
@@ -66,7 +68,7 @@ const Register: NextPage = () => {
             Register Account
           </h1>
           <ToastContainer />
-          {/* <Modal open={openModal} onConfirm={onConfirm} /> */}
+          <Modal showModal={showModal} onConfirm={onConfirm} setShowModal={setShowModal} />
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="mb-4">
               <label className="mb-2" htmlFor="email">E-mail Address</label>
