@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useContext, useEffect } from 'react';
 import { AuthContext } from '@/context/AuthContext';
+import Loading from 'components/Loading';
 
 type FormValues = {
     email: string;
@@ -42,6 +43,7 @@ const Forgot: NextPage = () => {
                         Recover Senso Number
                     </h1>
                     <ToastContainer />
+                    {loading && <Loading />}
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <div className="mb-4">
                             <label className="mb-2" htmlFor="email">E-mail Address</label>

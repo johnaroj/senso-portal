@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useContext, useEffect } from 'react';
 import { AuthContext } from '@/context/AuthContext';
+import Loading from 'components/Loading';
 
 type FormValues = {
     email: string;
@@ -14,7 +15,7 @@ type FormValues = {
 
 const Login: NextPage = () => {
     const { register, handleSubmit } = useForm<FormValues>();
-    const { login, error } = useContext(AuthContext)
+    const { loading, login, error } = useContext(AuthContext)
 
     const onSubmit: SubmitHandler<FormValues> = (data) => {
         login({ email: data.email, senso_number: Number(data.senso_number) });
@@ -41,6 +42,7 @@ const Login: NextPage = () => {
                         Login
                     </h1>
                     <ToastContainer />
+                    {loading && <Loading />}
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <div className="mb-4">
                             <label className="mb-2" htmlFor="email">E-mail Address</label>

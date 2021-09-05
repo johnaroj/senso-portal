@@ -1,9 +1,10 @@
 import { Footer } from 'components/Footer';
 import { Header } from 'components/Header';
 import type { NextPage } from 'next'
-import { useContext } from 'react'
+import React, { useContext } from 'react'
 import { useRouter } from 'next/router'
 import { AuthContext } from '@/context/AuthContext';
+import Loading from 'components/Loading';
 
 const Home: NextPage = () => {
   const { user } = useContext(AuthContext)

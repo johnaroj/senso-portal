@@ -8,7 +8,7 @@ export default async (req: NextApiRequest,
     res: NextApiResponse) => {
     if (req.method === 'GET') {
         let existing;
-        console.log(req.query)
+
         if (req.query.email) {
             const watermeter = req.query.watermeter as string;
             const email = req.query.email as string;

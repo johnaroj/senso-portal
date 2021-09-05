@@ -7,6 +7,7 @@ import Image from 'next/image'
 import { AuthContext } from '@/context/AuthContext';
 import Link from 'next/link'
 import Modal from 'components/Modal';
+import Loading from 'components/Loading';
 
 type FormValues = {
   email: string;
@@ -51,6 +52,10 @@ const Register: NextPage = () => {
     setShowModal(false)
   }
 
+  const onCloseModal = () => {
+    setShowModal(false)
+  }
+
   return (
     <div className="container mx-auto">
       <div className="py-4">
@@ -68,7 +73,8 @@ const Register: NextPage = () => {
             Register Account
           </h1>
           <ToastContainer />
-          <Modal showModal={showModal} onConfirm={onConfirm} setShowModal={setShowModal} />
+          {loading && <Loading />}
+          <Modal showModal={showModal} onConfirm={onConfirm} onCloseModal={onCloseModal} />
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="mb-4">
               <label className="mb-2" htmlFor="email">E-mail Address</label>
