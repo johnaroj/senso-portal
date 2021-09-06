@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { PrismaClient } from '@prisma/client'
 import { sendMail } from '@/utils/mail'
+import { NEXT_URL } from '@/config/index'
 
 const prisma = new PrismaClient();
 
@@ -59,6 +60,7 @@ export default async (req: NextApiRequest,
                     <p>
                         Danki di parti di Ofisina Sentral Di Estadistika (CBS). Thank you in advance from the Central Bureau of Statistics (CBS).
                     </p>
+                    <p>Pa login click <a href="${NEXT_URL}/account/login">aki</a></p>
                 </div>
             `
             )

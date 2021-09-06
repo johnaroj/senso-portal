@@ -32,7 +32,10 @@ module.exports = {
     },
   },
   variants: {
-    extend: {},
+    extend: {
+      backgroundColor: ['active'],
+      scale: ['active']
+    },
   },
   plugins: [require("tailwindcss-animation-delay")],
 }

@@ -4,7 +4,6 @@ import type { NextPage } from 'next'
 import React, { useContext } from 'react'
 import { useRouter } from 'next/router'
 import { AuthContext } from '@/context/AuthContext';
-import Loading from 'components/Loading';
 
 const Home: NextPage = () => {
   const { user } = useContext(AuthContext)
