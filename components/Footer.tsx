@@ -30,11 +30,14 @@ export const Footer = () => {
                 </div>
                 <div className='p-4'>
                     <h2 className="mb-2">Sigui nos na:</h2>
-                    <Link href="https://www.facebook.com/cbscur/"><a><FontAwesomeIcon icon={faFacebook} className='h-6' /></a></Link>
-                    <Link href="https://www.youtube.com/channel/UC97yy978ZXTZN4lzWqRzqLg"><a><FontAwesomeIcon icon={faYoutube} /></a></Link>
-                    <Link href="https://www.instagram.com/cbscuracao/"><a><FontAwesomeIcon icon={faInstagram} /></a></Link>
-                    <h2 className="mb-2">Tokante di e&nbsp;<a href="/sitemap">wèpsait</a></h2><ul>
-                        <li><a href="/sitemap">Sitemap</a></li>
+                    <div className="flex mb-4">
+                        <Link href="https://www.facebook.com/cbscur/"><a className="flex items-center mr-2 my-2"><FontAwesomeIcon icon={faFacebook} size="2x" /></a></Link>
+                        <Link href="https://www.youtube.com/channel/UC97yy978ZXTZN4lzWqRzqLg"><a className="flex items-center m-2"><FontAwesomeIcon icon={faYoutube} size="2x" /></a></Link>
+                        <Link href="https://www.instagram.com/cbscuracao/"><a className="flex items-center m-2"><FontAwesomeIcon icon={faInstagram} size="2x" /></a></Link>
+                    </div>
+
+                    <h2 className="mb-2 underline hover:no-underline">Tokante di e&nbsp;<a href="/sitemap">wèpsait</a></h2><ul>
+                        <li><a className="underline hover:no-underline" href="/sitemap">Sitemap</a></li>
                         <li>Disclaimer</li></ul>
                 </div>
             </div>
