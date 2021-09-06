@@ -21,7 +21,8 @@ const Modal = ({ showModal, onConfirm, onCloseModal }: Props) => {
                             </div>
                         </div>
                         <div className="bg-gray-200 p-2 rounded-b-2xl">
-                            <p className="text-center m-4">Do you want to share this Watermeter Number?</p>
+                            <p className="text-center m-4">E number di meter di awa ta wòrdu usa dor di mas ku un bibienda?</p>
+                            <p className="text-center m-4">Is this watermeter number shared by more than one household?</p>
                             <div className="flex justify-around items-center m-4 text-sm">
                                 <button className="bg-orange-500 hover:bg-orange-200 hover:text-black rounded shadow-md px-6 py-1 text-white hover:shadow-2xl" onClick={() => onConfirm(true)}> yes</button>
                                 <button className="bg-orange-200 hover:bg-orange-500 hover:text-white rounded shadow-md px-6 py-1 hover:shadow-2xl" onClick={() => onConfirm(false)}>No</button>
