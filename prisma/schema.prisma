@@ -11,10 +11,11 @@ generator client {
 }
 
 model Registration {
-  id           Int    @id @default(autoincrement())
+  id           Int      @id @default(autoincrement())
   email        String
   watermeter   String
   senso_number Int
+  createdAt    DateTime @default(now())
 }
 
 model Watermeter {

@@ -36,7 +36,7 @@ export const Footer = () => {
                         <Link href="https://www.instagram.com/cbscuracao/"><a className="flex items-center m-2"><FontAwesomeIcon icon={faInstagram} size="2x" /></a></Link>
                     </div>
 
-                    <h2 className="mb-2 underline hover:no-underline">Tokante di e&nbsp;<a href="/sitemap">wèpsait</a></h2><ul>
+                    <h2 className="mb-2">Tokante di e&nbsp;<a className='underline hover:no-underline' href="/sitemap">wèpsait</a></h2><ul>
                         <li><a className="underline hover:no-underline" href="/sitemap">Sitemap</a></li>
                         <li>Disclaimer</li></ul>
                 </div>
