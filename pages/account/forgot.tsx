@@ -14,12 +14,13 @@ type FormValues = {
 };
 
 const Forgot: NextPage = () => {
-    const { register, handleSubmit } = useForm<FormValues>();
-    const { forgot, error, loading } = useContext(AuthContext)
+    const { register, handleSubmit, reset } = useForm<FormValues>();
+    const { forgot, error } = useContext(AuthContext)
 
     const onSubmit: SubmitHandler<FormValues> = (data) => {
         forgot(data.email, data.watermeter);
-
+        reset();
+        toast.success('Email send')
     }
 
     useEffect(() => {
@@ -43,7 +44,6 @@ const Forgot: NextPage = () => {
                         Recover Senso Number
                     </h1>
                     <ToastContainer />
-                    {loading && <Loading />}
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <div className="mb-4">
                             <label className="mb-2" htmlFor="email">E-mail Address</label>
