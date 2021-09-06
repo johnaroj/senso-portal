@@ -6,7 +6,6 @@ import Image from 'next/image';
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useContext, useEffect } from 'react';
 import { AuthContext } from '@/context/AuthContext';
-import Loading from 'components/Loading';
 
 type FormValues = {
     email: string;
@@ -63,7 +62,7 @@ const Forgot: NextPage = () => {
                                 required
                             />
                         </div>
-                        <input type="submit" disabled={loading} value={`${loading ? 'Loading...' : 'Send'}`} className={`h-10 w-full my-2 ${loading ? 'bg-jelly-bean-200' : 'bg-jelly-bean-500'} hover:bg-jelly-bean-400 text-white active:shadow-md active:scale-110 active:text-gray-100`} />
+                        <input type="submit" value='Send' className="h-10 w-full my-2 bg-jelly-bean-500 hover:bg-jelly-bean-400 text-white active:shadow-md active:scale-110 active:text-gray-100" />
                     </form>
                     <p>
                         Go Back to <Link href='/account/login'><a className="no-underline hover:underline hover:text-blue-700">Login</a></Link>
