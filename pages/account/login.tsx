@@ -62,7 +62,7 @@ const Login: NextPage = () => {
                                 required
                             />
                         </div>
-                        <input type="submit" value="Login" className='h-10 w-full my-2 bg-jelly-bean-500 hover:bg-jelly-bean-400 text-white active:shadow-md active:scale-110 active:text-gray-100' />
+                        <input type="submit" value="Login" className='h-10 w-full my-2 bg-jelly-bean-500 hover:bg-jelly-bean-400 text-white active:shadow-md active:scale-110 active:bg-jelly-bean-600' />
                     </form>
                     <div className="flex justify-between">
                         <p>

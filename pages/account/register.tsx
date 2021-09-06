@@ -94,7 +94,7 @@ const Register: NextPage = () => {
                 required
               />
             </div>
-            <input type="submit" disabled={loading} value={`${loading ? 'Loading...' : 'Register'}`} className={`h-10 w-full my-2 ${loading ? 'bg-jelly-bean-200' : 'bg-jelly-bean-500'} hover:bg-jelly-bean-400 text-white active:shadow-md active:scale-110 active:text-gray-100`} />
+            <input type="submit" disabled={loading} value={`${loading ? 'Loading...' : 'Register'}`} className={`h-10 w-full my-2 ${loading ? 'bg-jelly-bean-300' : 'bg-jelly-bean-500'} hover:bg-jelly-bean-400 text-white active:shadow-md active:scale-110 active:bg-jelly-bean-600`} />
           </form>
           <p>
             Already have an account? <Link href='/account/login'>Login</Link>
