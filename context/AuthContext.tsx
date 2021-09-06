@@ -104,20 +104,24 @@ export const AuthProvider: FC = ({ children }) => {
     }
   }
   const checkWatermeter = async (watermeter: string) => {
+    setLoading(true)
     const response = await fetch(`${NEXT_URL}/api/registration?watermeter=${watermeter}`);
     if (!response.ok) {
       throw new Error(response.statusText)
     }
     const exists = await response.json();
+    setLoading(false)
     return { exists: !!exists.message, message: exists.message };
   }
 
   const checkRegistration = async (watermeter: string, email: string) => {
+    setLoading(true)
     const response = await fetch(`${NEXT_URL}/api/registration?watermeter=${watermeter}&email=${email}`);
     if (!response.ok) {
       throw new Error(response.statusText)
     }
     const exists = await response.json();
+    setLoading(false)
     return { exists: !!exists.message, message: exists.message };
   }
 
