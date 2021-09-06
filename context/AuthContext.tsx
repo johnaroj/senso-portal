@@ -36,7 +36,7 @@ export const AuthProvider: FC = ({ children }) => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ ...registration, createdAt: Date.now() }),
+      body: JSON.stringify(registration),
     })
 
     const data = await res.json()

@@ -15,7 +15,7 @@ model Registration {
   email        String
   watermeter   String
   senso_number Int
-  createdAt    DateTime
+  createdAt    DateTime @default(now())
 }
 
 model Watermeter {
