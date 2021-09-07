@@ -14,8 +14,8 @@ const Home: NextPage = () => {
       <main className="container mx-auto flex flex-col items-center justify-center h-96">
         {user?.senso_number &&
           <div className="border-2 bg-gray-100 p-8 mb-4 text-center">
-            <h1 className="text-2xl">You have successfully registered</h1>
-            <p className="">login to complete your sensus</p>
+            <h1 className="text-2xl">Pa kompleta bo registrashon, wak bo email pa bo number di Senso</h1>
+            <p className="">To complete your registration, check your email for your census number</p>
           </div>
         }
 
