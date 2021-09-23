@@ -1,9 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { PrismaClient } from '@prisma/client'
 import { sendMail } from '@/utils/mail'
 import { NEXT_URL } from '@/config/index'
 
-const prisma = new PrismaClient();
+import prisma from '@/config/client'
 
 export default async (req: NextApiRequest,
     res: NextApiResponse) => {
