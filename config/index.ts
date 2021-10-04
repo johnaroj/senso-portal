@@ -13,4 +13,4 @@ export const NEXT_MAIL_USER =
 export const NEXT_MAIL_PASS =
     process.env.MAIL_PASS || "cbs*senso*"
 
-export const NEXT_CENSUS_URL = process.env.CENSUS_URL || 'https://www.dooblocawi.com/client/Survey.aspx?Ticket=NFNI367H&Censusid='
+export const NEXT_CENSUS_URL = process.env.CENSUS_URL || 'https://www.dooblocawi.com/client/Survey.aspx?Ticket=880Q0GC3&prcen='
